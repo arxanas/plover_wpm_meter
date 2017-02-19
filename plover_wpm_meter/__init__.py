@@ -3,11 +3,8 @@ import time
 from PyQt5.QtCore import Qt, QTimer, pyqtSlot
 
 from plover.gui_qt.tool import Tool
-from textstat.textstat import textstat
 
 from plover_wpm_meter.wpm_meter_ui import Ui_WpmMeter
-
-_NUM_SYLLABLES_PER_WORD = 1.44
 
 
 class PloverWpmMeter(Tool, Ui_WpmMeter):
@@ -23,7 +20,7 @@ class PloverWpmMeter(Tool, Ui_WpmMeter):
         self.setupUi(self)
 
         self._timer = QTimer()
-        self._timer.setInterval(100)
+        self._timer.setInterval(1000)
         self._timer.setTimerType(Qt.PreciseTimer)
         self._timer.timeout.connect(self._update_wpms)
         self._timer.start()
@@ -44,15 +41,13 @@ class PloverWpmMeter(Tool, Ui_WpmMeter):
                 self._chars = self._chars[:-remove]
             self._chars += _timestamp_chars(action.text)
 
-        self._update_wpms()
-
     @pyqtSlot()
     def _update_wpms(self):
         max_timeout = max(self._TIMEOUTS.values())
         self._chars = _filter_old_chars(self._chars, max_timeout)
         for name, timeout in self._TIMEOUTS.items():
             chars = _filter_old_chars(self._chars, timeout)
-            wpm = _wpm_of_chars(chars, timeout)
+            wpm = _wpm_of_chars(chars)
             getattr(self, name).display(str(wpm))
 
 
@@ -67,9 +62,22 @@ def _filter_old_chars(chars, timeout):
             if (current_time - t) <= timeout]
 
 
-def _wpm_of_chars(chars, timeout):
+def _words_in_string(string):
+    # Formal definition; see https://en.wikipedia.org/wiki/Words_per_minute
+    return len(string) / 5
+
+
+def _wpm_of_chars(chars):
+    if not chars:
+        return 0
+
+    start_time = min(t for _, t in chars)
+    current_time = time.time()
+    time_interval = current_time - start_time
+    time_interval = max(1, time_interval)
+
     text = "".join(c for c, _ in chars)
-    num_words = textstat.syllable_count(text) / _NUM_SYLLABLES_PER_WORD
-    num_minutes = timeout / 60
+    num_words = _words_in_string(text)
+    num_minutes = time_interval / 60
     num_words_per_minute = num_words / num_minutes
     return int(round(num_words_per_minute))

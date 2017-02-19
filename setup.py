@@ -16,7 +16,6 @@ setup(
     install_requires=[
         "PyQt5",
         "plover>=4.0.0.dev0",
-        "textstat>=0.3.1",
     ],
     packages=find_packages(),
     entry_points="""
