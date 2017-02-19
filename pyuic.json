@@ -1,0 +1,10 @@
+{
+    "files": [
+        ["plover_wpm_meter/*.ui", "plover_wpm_meter"]
+    ], 
+    "hooks": [], 
+    "pyrcc": "pyrcc5", 
+    "pyrcc_options": "", 
+    "pyuic": "pyuic5", 
+    "pyuic_options": "--from-import"
+}

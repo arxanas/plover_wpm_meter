@@ -1,0 +1,3 @@
+pytest==3.0.6
+pytest-pythonpath==0.7.1
+mock==2.0.0
