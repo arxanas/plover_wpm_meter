@@ -14,7 +14,6 @@ setup(
     author_email="me@waleedkhan.name",
     license="GPLv3",
     install_requires=[
-        "PyQt5",
         "plover>=4.0.0.dev0",
     ],
     packages=find_packages(),
