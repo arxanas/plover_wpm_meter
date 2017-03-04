@@ -4,6 +4,7 @@ from PyQt5.QtCore import Qt, QTimer, pyqtSlot
 
 from plover.gui_qt.tool import Tool
 
+from plover_wpm_meter.textstat.textstat import textstat
 from plover_wpm_meter.wpm_meter_ui import Ui_WpmMeter
 
 
@@ -18,6 +19,9 @@ class PloverWpmMeter(Tool, Ui_WpmMeter):
     def __init__(self, engine):
         super().__init__(engine)
         self.setupUi(self)
+
+        self.wpm_method.addItem("NCRA", "ncra")
+        self.wpm_method.addItem("Traditional", "traditional")
 
         self._timer = QTimer()
         self._timer.setInterval(1000)
@@ -47,7 +51,7 @@ class PloverWpmMeter(Tool, Ui_WpmMeter):
         self._chars = _filter_old_chars(self._chars, max_timeout)
         for name, timeout in self._TIMEOUTS.items():
             chars = _filter_old_chars(self._chars, timeout)
-            wpm = _wpm_of_chars(chars)
+            wpm = _wpm_of_chars(chars, method=self.wpm_method.currentData())
             getattr(self, name).display(str(wpm))
 
 
@@ -62,12 +66,23 @@ def _filter_old_chars(chars, timeout):
             if (current_time - t) <= timeout]
 
 
-def _words_in_string(string):
-    # Formal definition; see https://en.wikipedia.org/wiki/Words_per_minute
-    return len(string) / 5
+def _words_in_text(string, method):
+    if method == "ncra":
+        # The NCRA defines a "word" to be 1.4 syllables, which is the average
+        # number of syllables per English word.
+        syllables_per_word = 1.4
+        # For some reason, textstat returns syllable counts such as a
+        # one-syllable word like "the" being 0.9 syllables.
+        syllables_in_text = textstat.syllable_count(string) / 0.9
+        return syllables_in_text * (1 / syllables_per_word)
+    elif method == "traditional":
+        # Formal definition; see https://en.wikipedia.org/wiki/Words_per_minute
+        return len(string) / 5
+    else:
+        assert False, "bad wpm method: " + method
 
 
-def _wpm_of_chars(chars):
+def _wpm_of_chars(chars, method):
     if not chars:
         return 0
 
@@ -77,7 +92,7 @@ def _wpm_of_chars(chars):
     time_interval = max(1, time_interval)
 
     text = "".join(c for c, _ in chars)
-    num_words = _words_in_string(text)
+    num_words = _words_in_text(text, method)
     num_minutes = time_interval / 60
     num_words_per_minute = num_words / num_minutes
     return int(round(num_words_per_minute))
