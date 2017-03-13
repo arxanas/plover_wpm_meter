@@ -21,6 +21,7 @@ class PloverWpmMeter(Tool, Ui_WpmMeter):
         super().__init__(engine)
         self.setupUi(self)
 
+        self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
         self.wpm_method.addItem("NCRA", "ncra")
         self.wpm_method.addItem("Traditional", "traditional")
 
