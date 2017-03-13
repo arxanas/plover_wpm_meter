@@ -10,6 +10,7 @@ from plover_wpm_meter.wpm_meter_ui import Ui_WpmMeter
 
 class PloverWpmMeter(Tool, Ui_WpmMeter):
     TITLE = "WPM Meter"
+    ROLE = "wpm_meter"
 
     _TIMEOUTS = {
         "wpm1": 10,
@@ -31,6 +32,9 @@ class PloverWpmMeter(Tool, Ui_WpmMeter):
 
         self._chars = []
         engine.signal_connect("translated", self._on_translation)
+
+        self.restore_state()
+        self.finished.connect(self.save_state)
 
     def _on_translation(self, old, new):
         for action in old:
