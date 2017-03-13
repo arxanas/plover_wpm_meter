@@ -6,7 +6,7 @@ import math
 import operator
 
 exclude = list(string.punctuation)
-easy_word_set = set([ln.strip() for ln in pkg_resources.resource_stream('textstat', 'easy_words.txt')])
+easy_word_set = set([ln.strip() for ln in pkg_resources.resource_stream('plover_wpm_meter.textstat', 'easy_words.txt')])
 
 
 class textstatistics:
