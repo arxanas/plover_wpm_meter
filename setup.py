@@ -17,6 +17,7 @@ setup(
         "plover>=4.0.0.dev0",
     ],
     packages=find_packages(),
+    include_package_data=True,
     entry_points="""
     [plover.gui.qt.tool]
     wpm_meter = plover_wpm_meter:PloverWpmMeter
