@@ -7,7 +7,7 @@ except ImportError:
     cmdclass = {}
 
 setup(
-    name="Plover: WPM meter",
+    name="Plover: WPM and strokes meter",
     version="0.1",
     description="A meter to show your typing speed in Plover.",
     author="Waleed Khan",
@@ -21,6 +21,7 @@ setup(
     entry_points="""
     [plover.gui.qt.tool]
     wpm_meter = plover_wpm_meter:PloverWpmMeter
+    strokes_meter = plover_wpm_meter:PloverStrokesMeter
     """,
     cmdclass=cmdclass,
 )

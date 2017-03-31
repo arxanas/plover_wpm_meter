@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StrokesMeter</class>
+ <widget class="QDialog" name="StrokesMeter">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>180</width>
+    <height>151</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Strokes Meter</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>30</y>
+     <width>181</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="strokes_meter" columnstretch="2,1" columnminimumwidth="0,0">
+    <item row="0" column="0">
+     <widget class="QLCDNumber" name="strokes1">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="segmentStyle">
+       <enum>QLCDNumber::Flat</enum>
+      </property>
+      <property name="value" stdset="0">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="strokes1_label">
+      <property name="text">
+       <string>last 10s</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLCDNumber" name="strokes2">
+      <property name="segmentStyle">
+       <enum>QLCDNumber::Flat</enum>
+      </property>
+      <property name="value" stdset="0">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="strokes2_label">
+      <property name="text">
+       <string>last 1m</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>181</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="strokes_controls" columnstretch="0">
+    <item row="0" column="0">
+     <widget class="QComboBox" name="strokes_method"/>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="0" margin="0"/>
+ <resources/>
+ <connections/>
+</ui>
