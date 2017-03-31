@@ -15,6 +15,7 @@ setup(
     license="GPLv3",
     install_requires=[
         "plover>=4.0.0.dev0",
+        "textstat>=0.3.1",
     ],
     packages=find_packages(),
     entry_points="""

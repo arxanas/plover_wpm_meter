@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt, QTimer, pyqtSlot
 
 from plover.gui_qt.tool import Tool
 
-from plover_wpm_meter.textstat.textstat import textstat
+from textstat.textstat import textstat
 from plover_wpm_meter.wpm_meter_ui import Ui_WpmMeter
 
 
