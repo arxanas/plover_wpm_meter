@@ -6,7 +6,6 @@ from plover.gui_qt.tool import Tool
 from textstat.textstat import textstat
 
 from plover_wpm_meter.strokes_meter_ui import Ui_StrokesMeter
-from plover_wpm_meter.textstat.textstat import textstat
 from plover_wpm_meter.wpm_meter_ui import Ui_WpmMeter
 
 
