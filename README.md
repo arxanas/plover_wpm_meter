@@ -40,3 +40,5 @@ Then launch Plover and select the WPM meter from the tools.
 # License
 
 This plugin is licensed under the GPLv3.
+
+Icon made by [Freepik](http://www.freepik.com/) from [www.flaticon.com](http://www.flaticon.com/).
