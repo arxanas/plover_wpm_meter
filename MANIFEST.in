@@ -1,0 +1,5 @@
+# UI.
+exclude plover_wpm_meter/*_rc.py
+exclude plover_wpm_meter/*_ui.py
+include plover_wpm_meter/*.ui
+recursive-include plover_wpm_meter/resources *
