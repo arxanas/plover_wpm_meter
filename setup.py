@@ -1,27 +1,19 @@
-from setuptools import find_packages, setup
+#!/usr/bin/env python3
 
-try:
-    from pyqt_distutils.build_ui import build_ui
-    cmdclass = {"build_ui": build_ui}
-except ImportError:
-    cmdclass = {}
+__requires__ = '''
+plover>=4.0.0.dev2
+setuptools>=36.4.0
+'''
 
-setup(
-    name="Plover: WPM and strokes meter",
-    version="0.1",
-    description="A meter to show your typing speed in Plover.",
-    author="Waleed Khan",
-    author_email="me@waleedkhan.name",
-    license="GPLv3",
-    install_requires=[
-        "plover>=4.0.0.dev0",
-        "textstat>=0.3.1",
-    ],
-    packages=find_packages(),
-    entry_points="""
-    [plover.gui.qt.tool]
-    wpm_meter = plover_wpm_meter:PloverWpmMeter
-    strokes_meter = plover_wpm_meter:PloverStrokesMeter
-    """,
-    cmdclass=cmdclass,
-)
+from setuptools import setup
+
+from plover_build_utils.setup import BuildPy, BuildUi, Test
+
+BuildPy.build_dependencies.append('build_ui')
+BuildUi.hooks = ['plover_build_utils.pyqt:fix_icons']
+cmdclass = {
+    'build_py': BuildPy,
+    'build_ui': BuildUi,
+}
+
+setup(cmdclass=cmdclass)
