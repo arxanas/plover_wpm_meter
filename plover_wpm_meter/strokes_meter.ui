@@ -88,6 +88,8 @@
   </widget>
  </widget>
  <layoutdefault spacing="0" margin="0"/>
- <resources/>
+ <resources>
+  <include location="resources/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

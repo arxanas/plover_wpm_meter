@@ -46,8 +46,10 @@ class BaseMeter(Tool):
 
 
 class PloverWpmMeter(BaseMeter, Ui_WpmMeter):
+
     TITLE = "WPM Meter"
     ROLE = "wpm_meter"
+    ICON = ':/wpm_meter/icon.svg'
 
     _TIMEOUTS = {
         "wpm1": 10,
@@ -71,8 +73,10 @@ class PloverWpmMeter(BaseMeter, Ui_WpmMeter):
 
 
 class PloverStrokesMeter(BaseMeter, Ui_StrokesMeter):
+
     TITLE = "Strokes Meter"
     ROLE = "strokes_meter"
+    ICON = ':/wpm_meter/icon.svg'
 
     _TIMEOUTS = {
         "strokes1": 10,
