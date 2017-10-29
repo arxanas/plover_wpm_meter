@@ -3,10 +3,29 @@ import time
 from PyQt5.QtCore import Qt, QTimer
 
 from plover.gui_qt.tool import Tool
+from plover.formatting import OutputHelper
 from textstat.textstat import textstat
 
 from plover_wpm_meter.strokes_meter_ui import Ui_StrokesMeter
 from plover_wpm_meter.wpm_meter_ui import Ui_WpmMeter
+
+
+class CaptureOutput(object):
+
+    def __init__(self, chars):
+        self.chars = chars
+
+    def send_backspaces(self, n):
+        del self.chars[-n:]
+
+    def send_string(self, s):
+        self.chars += _timestamp_items(s)
+
+    def send_key_combination(self, c):
+        pass
+
+    def send_engine_command(self, c):
+        pass
 
 
 class BaseMeter(Tool):
@@ -29,17 +48,9 @@ class BaseMeter(Tool):
         engine.signal_connect("translated", self.on_translation)
 
     def on_translation(self, old, new):
-        for action in old:
-            remove = len(action.text)
-            if remove > 0:
-                self.chars = self.chars[:-remove]
-            self.chars += _timestamp_items(action.replace)
-
-        for action in new:
-            remove = len(action.replace)
-            if remove > 0:
-                self.chars = self.chars[:-remove]
-            self.chars += _timestamp_items(action.text)
+        output = CaptureOutput(self.chars)
+        output_helper = OutputHelper(output, False, False)
+        output_helper.render(None, old, new)
 
     def on_timer(self):
         raise NotImplementedError()
