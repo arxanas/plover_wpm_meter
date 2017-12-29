@@ -35,6 +35,8 @@ class BaseMeter(Tool):
         self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
         self.setupUi(self)
 
+        self.is_pinned_checkbox.stateChanged.connect(self.set_is_pinned)
+
         self._timer = QTimer()
         self._timer.setInterval(1000)
         self._timer.setTimerType(Qt.PreciseTimer)
@@ -54,6 +56,21 @@ class BaseMeter(Tool):
 
     def on_timer(self):
         raise NotImplementedError()
+
+    def _save_state(self, settings):
+        settings.setValue("is_pinned", self.is_pinned_checkbox.isChecked())
+
+    def _restore_state(self, settings):
+        is_pinned = settings.value("is_pinned", True)
+        self.is_pinned_checkbox.setChecked(is_pinned)
+
+    def set_is_pinned(self):
+        is_pinned = self.is_pinned_checkbox.isChecked()
+        if is_pinned:
+            self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
+        else:
+            self.setWindowFlags(self.windowFlags() & ~Qt.WindowStaysOnTopHint)
+        self.show()
 
 
 class PloverWpmMeter(BaseMeter, Ui_WpmMeter):

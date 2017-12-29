@@ -77,12 +77,45 @@
      <x>0</x>
      <y>0</y>
      <width>181</width>
-     <height>36</height>
+     <height>27</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="wpm_controls" columnstretch="0">
-    <item row="0" column="0">
-     <widget class="QComboBox" name="wpm_method"/>
+   <layout class="QHBoxLayout" name="wpm_controls">
+    <property name="spacing">
+     <number>-1</number>
+    </property>
+    <item>
+     <widget class="QComboBox" name="wpm_method">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>1</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>0</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="is_pinned_checkbox">
+      <property name="text">
+       <string>📌</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
