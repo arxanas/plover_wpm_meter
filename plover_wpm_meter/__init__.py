@@ -61,7 +61,7 @@ class BaseMeter(Tool):
         settings.setValue("is_pinned", self.is_pinned_checkbox.isChecked())
 
     def _restore_state(self, settings):
-        is_pinned = settings.value("is_pinned", True)
+        is_pinned = settings.value("is_pinned", True, bool)
         self.is_pinned_checkbox.setChecked(is_pinned)
 
     def set_is_pinned(self):
