@@ -6,7 +6,7 @@ either or both of words per minute or strokes per minute:
 
 -  **Words per minute**: Shows the rate at which you stroked words in
    the last 10 and 60 seconds.
--  **Strokes per minute**: Shows how efficiently you stroked words in
+-  **Strokes per word**: Shows how efficiently you stroked words in
    the last 10 and 60 seconds. Lower values are more efficient, e.g. a
    value of 1 means that on average it took you one stroke to write out
    a word.
